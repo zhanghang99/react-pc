@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:11:19
- * @LastEditTime: 2019-08-26 15:18:29
+ * @LastEditTime: 2019-08-27 11:17:57
  * @LastEditors: Please set LastEditors
  */
 function getRelation(str1, str2) {
@@ -60,8 +60,24 @@ export function getRoutes(path, routerData) {
   });
   return renderRoutes;
 }
+export function targetValue(res,arr){
+    let value = res;
+    arr.forEach(v => {
+        value = value[v];
+    });
+    return value;
+}
 
-
+export function textDisplay([res, arr, type, isEmpty],defaultValue){
+    console.log(res, arr, type, isEmpty,defaultValue);
+    const result = judgment(res, arr, type, isEmpty)
+    const value = targetValue(res, arr);
+    if(!result){
+        return defaultValue
+    }else{
+        return value
+    }
+}
 /**
  * @description: 数据容错处理judgment(res, ['data', 'data', 'key'], 'Array',true)
  * @param {res:初始数据}
@@ -71,10 +87,7 @@ export function getRoutes(path, routerData) {
  */
 export function judgment(res, arr, type, isEmpty) {
   try {
-      let value = res;
-      arr.forEach(v => {
-          value = value[v];
-      });
+      const value = targetValue(res, arr);
       const toString = Object.prototype.toString.call(value).slice(8, -1);
       if (isEmpty) {
           if ((type === 'Array' && value.length === 0) || (type === 'Object' && Object.keys(value).length === 0)) {
