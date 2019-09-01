@@ -7,14 +7,14 @@ export default class MobileCom extends React.Component{
       a:1
     }
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount (){
     console.log("父componentWillMount");
   }
   componentDidMount(){
     console.log('父componentDidMount');
     setTimeout(()=>{this.setState({a:2})},1000);
   }
-  componentWillReceiveProps(){
+  UNSAFE_componentWillReceiveProps(){
     console.log("父componentWillReceiveProps");
   }
   render(){

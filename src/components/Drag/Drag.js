@@ -10,7 +10,7 @@ export default class Drag extends React.Component{
       Model:false
     }
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount (){
     console.log("子componentWillMount");
     this.screenWidth = window.screen.width;
     this.screenHeight = window.screen.height;
@@ -21,7 +21,7 @@ export default class Drag extends React.Component{
   componentDidMount() {
     console.log("子componentDidMount");
   }
-  componentWillReceiveProps(){
+  UNSAFE_componentWillReceiveProps(){
     console.log("子componentWillReceiveProps");
   }
   coordinate = (data) =>{

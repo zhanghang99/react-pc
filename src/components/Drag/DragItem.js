@@ -16,7 +16,7 @@ export default class DragItem extends React.Component{
   componentDidMount(){
     this.changeOffset();
   }
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
   }
   componentDidUpdate(){
     // this.changeOffset();

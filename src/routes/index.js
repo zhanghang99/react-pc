@@ -22,7 +22,6 @@ export default class Index extends React.Component{
     this.props.history.push('/login');
   }
   triggerGet = () => {
-    console.log(this.props.dispatch, "this.props.dispatch");
     this.props.dispatch({
       type: 'global/queryGet',
     });

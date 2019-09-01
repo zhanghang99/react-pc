@@ -8,7 +8,7 @@ export default class List extends React.Component{
 
     }
   }
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     // positionTarget为true即data-target='true'的元素
     if(nextProps.positionTarget){
       this.props.positionTargetEle(this.positionTarget)
