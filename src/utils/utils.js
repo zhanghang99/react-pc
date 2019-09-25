@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:11:19
- * @LastEditTime: 2019-08-27 11:17:57
+ * @LastEditTime: 2019-09-25 10:43:54
  * @LastEditors: Please set LastEditors
  */
 function getRelation(str1, str2) {
@@ -60,48 +60,36 @@ export function getRoutes(path, routerData) {
   });
   return renderRoutes;
 }
-export function targetValue(res,arr){
-    let value = res;
-    arr.forEach(v => {
-        value = value[v];
-    });
-    return value;
-}
 
-export function textDisplay([res, arr, type, isEmpty],defaultValue){
-    console.log(res, arr, type, isEmpty,defaultValue);
-    const result = judgment(res, arr, type, isEmpty)
-    const value = targetValue(res, arr);
-    if(!result){
-        return defaultValue
-    }else{
-        return value
-    }
-}
 /**
  * @description: 数据容错处理judgment(res, ['data', 'data', 'key'], 'Array',true)
  * @param {res:初始数据}
- * @param {arr:目标数据的所有key的组合,目标数据:res.data.data.key,所有key的组合:['data', 'data', 'key']}
+ * @param {arr:目标数据的所有key的组合,目标数据:res.data.data.key,所有key的组合:['data', 'data', 'key'],当所有key都不存在时传[]}
  * @param {type:目标数据的数据类型}
  * @param {isEmpty:判断是否需要检测目标数据Array或者Object时内容为空，true：需要判断，false:不需要判断，非必要字段}
  */
 export function judgment(res, arr, type, isEmpty) {
-  try {
-      const value = targetValue(res, arr);
-      const toString = Object.prototype.toString.call(value).slice(8, -1);
-      if (isEmpty) {
-          if ((type === 'Array' && value.length === 0) || (type === 'Object' && Object.keys(value).length === 0)) {
-              return false;
-          }
-      }
-      if (toString === type) {
-          return true;
-      }
-      return false;
-  } catch (err) {
-      console.log(err);
-      return false;
-  }
+    try {
+        let value = res;
+        if (arr.length) {
+            arr.forEach(v => {
+                value = value[v];
+            });
+        }
+        const toString = Object.prototype.toString.call(value).slice(8, -1);
+        if (isEmpty) {
+            if ((type === 'Array' && value.length === 0) || (type === 'Object' && Object.keys(value).length === 0)) {
+                return false;
+            }
+        }
+        if (toString === type) {
+            return true;
+        }
+        return false;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
 };
 
 /**
